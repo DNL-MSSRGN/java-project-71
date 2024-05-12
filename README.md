@@ -5,7 +5,7 @@
 #### Пример приложения
 
 #### Yaml
-[![asciicast](https://asciinema.org/a/erYos80pFplfR2geHHyHSwtnx.svg)](https://asciinema.org/a/erYos80pFplfR2geHHyHSwtnx))
+[![asciicast](https://asciinema.org/a/erYos80pFplfR2geHHyHSwtnx.svg)](https://asciinema.org/a/erYos80pFplfR2geHHyHSwtnx)
 
 #### Json
-[![asciicast](https://asciinema.org/a/HtmYmMRoKQnfcMvCAosS1Dc4G.svg)](https://asciinema.org/a/HtmYmMRoKQnfcMvCAosS1Dc4G))
+[![asciicast](https://asciinema.org/a/HtmYmMRoKQnfcMvCAosS1Dc4G.svg)](https://asciinema.org/a/HtmYmMRoKQnfcMvCAosS1Dc4G)
