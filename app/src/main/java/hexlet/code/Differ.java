@@ -1,29 +1,20 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import static hexlet.code.Parser.parser;
+
 public class Differ {
+
+    @SuppressWarnings("checkstyle:RegexpSingleline")
     public static String generate(String pathToFile1, String pathToFile2) throws IOException {
-        Path normalizeAbsolutePath1 = Paths.get(pathToFile1).toAbsolutePath().normalize();
-        var file1 = Files.readString(normalizeAbsolutePath1);
-        Map<String, Object> mapFile1 =
-                new ObjectMapper().readValue(file1, new TypeReference<Map<String, Object>>() { });
-
-
-        Path normalizeAbsolutePath2 = Paths.get(pathToFile2).toAbsolutePath().normalize();
-        var file2 = Files.readString(normalizeAbsolutePath2);
-        Map<String, Object> mapFile2 =
-                new ObjectMapper().readValue(file2, new TypeReference<Map<String, Object>>() { });
+        Map<String, Object> mapFile1 = parser(pathToFile1);
+        Map<String, Object> mapFile2 = parser(pathToFile2);
         Map<String, Object> resultMap = new HashMap<>();
 
         for (var key : mapFile1.entrySet()) {
@@ -32,7 +23,7 @@ public class Differ {
                 resultMap.put(newKey, key.getValue());
             }
             if (mapFile2.containsKey(key.getKey())
-                    && mapFile2.get(key.getKey()).equals(key.getValue()))  {
+                    && mapFile2.get(key.getKey()).equals(key.getValue())) {
                 String newKey = "  "  + key.getKey();
                 resultMap.put(newKey, key.getValue());
             }

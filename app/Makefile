@@ -1,33 +1,31 @@
-.DEFAULT_GOAL := build-run
 
-clean:
-	./gradlew clean
-
-build:
-	./gradlew clean build
-
-install:
-	./gradlew clean install
 
 run-dist:
 	./build/install/app/bin/app src/test/resources/file1.json src/test/resources/file2.json
 
-run:
-	./gradlew run
+run-dist2:
+	./build/install/app/bin/app src/test/resources/file1.yml src/test/resources/file2.yml
 
-test:
-	./gradlew test
+help:
+	@./build/install/app/bin/app -h
 
-report:
-	./gradlew jacocoTestReport
+clean:
+	@./gradlew clean
+
+install:
+	@./gradlew clean install
 
 lint:
-	./gradlew checkstyleMain checkstyleTest
+	@./gradlew checkstyleMain checkstyleTest
 
-update-deps:
-	./gradlew useLatestVersions
+test:
+	@./gradlew test
 
 
-build-run: build run
+build:
+	@./gradlew clean build
+
+report:
+	@./gradlew jacocoTestReport
 
 .PHONY: build
