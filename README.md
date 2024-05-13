@@ -10,8 +10,8 @@
 #### Json
 [![asciicast](https://asciinema.org/a/HtmYmMRoKQnfcMvCAosS1Dc4G.svg)](https://asciinema.org/a/HtmYmMRoKQnfcMvCAosS1Dc4G)
 
-#### Пример дифа для вложенных структур (yml, json)
+#### Пример дифа для вложенных структур Stylish (yml, json)
 [![asciicast](https://asciinema.org/a/JGowYnFE8GjswAgMUMMJEm4aD.svg)](https://asciinema.org/a/JGowYnFE8GjswAgMUMMJEm4aD)
 
-#### Пример дифа для вложенных структур (yml, json)
+#### Пример дифа для вложенных структур Plain (yml, json)
 [![asciicast](https://asciinema.org/a/xl2fvNqFD4IzDYhCAULTS5Uk2.svg)](https://asciinema.org/a/xl2fvNqFD4IzDYhCAULTS5Uk2)
