@@ -42,7 +42,7 @@ public class Parser {
             }
         }
 
-        Map<String, Object> stringObjectMap = map.readValue(file, new TypeReference<Map<String, Object>>() {
+        Map<String, Object> stringObjectMap = map.readValue(file, new TypeReference<>() {
         });
         return stringObjectMap;
 

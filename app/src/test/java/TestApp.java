@@ -10,19 +10,21 @@ public final class TestApp {
     private static final String PATH2 = "src/test/resources/file2.json";
     private static final String PATH3 = "src/test/resources/file1.yml";
     private static final String PATH4 = "src/test/resources/file2.yml";
-    private static final String PATH5 = "src/test/resources/resultDiffer.txt";
+    private static final String PATH5 = "src/test/resources/stylish.txt";
+    private static final String FORMAT = "stylish";
+
 
     @Test
     void testGenerateJson() throws Exception {
         var expected = Files.readString(Path.of(PATH5));
-        String actual = Differ.generate(PATH1, PATH2);
+        String actual = Differ.generate(PATH1, PATH2, FORMAT);
         assertEquals(expected, actual);
     }
 
     @Test
     void testGenerateYaml() throws Exception {
         var expected = Files.readString(Path.of(PATH5));
-        String actual = Differ.generate(PATH3, PATH4);
+        String actual = Differ.generate(PATH3, PATH4, FORMAT);
         assertEquals(expected, actual);
     }
 }

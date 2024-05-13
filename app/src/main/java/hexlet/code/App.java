@@ -15,9 +15,9 @@ class App implements Callable<Integer> {
     @Parameters(paramLabel = "filepath2", description = "path to second file")
     private String filepath2;
 
-    @Option(names = {"-f", "--format"},
+    @Option(names = {"-f", "--format"}, defaultValue = "stylish",
             description = "output format [default: stylish]")
-    private String format = "stylish";
+    private String format;
 
     public static void main(String... args) {
         int exitCode = new CommandLine(new App()).execute(args);
@@ -26,7 +26,7 @@ class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        System.out.println(Differ.generate(filepath1, filepath2));
+        System.out.println(Differ.generate(filepath1, filepath2, format));
         return null;
     }
 }
