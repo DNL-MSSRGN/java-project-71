@@ -9,3 +9,6 @@
 
 #### Json
 [![asciicast](https://asciinema.org/a/HtmYmMRoKQnfcMvCAosS1Dc4G.svg)](https://asciinema.org/a/HtmYmMRoKQnfcMvCAosS1Dc4G)
+
+#### Пример дифа для вложенных структур (yml, json)
+[![asciicast](https://asciinema.org/a/JGowYnFE8GjswAgMUMMJEm4aD.svg)](https://asciinema.org/a/JGowYnFE8GjswAgMUMMJEm4aD)
