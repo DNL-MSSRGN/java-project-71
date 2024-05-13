@@ -12,3 +12,6 @@
 
 #### Пример дифа для вложенных структур (yml, json)
 [![asciicast](https://asciinema.org/a/JGowYnFE8GjswAgMUMMJEm4aD.svg)](https://asciinema.org/a/JGowYnFE8GjswAgMUMMJEm4aD)
+
+#### Пример дифа для вложенных структур (yml, json)
+[![asciicast](https://asciinema.org/a/xl2fvNqFD4IzDYhCAULTS5Uk2.svg)](https://asciinema.org/a/xl2fvNqFD4IzDYhCAULTS5Uk2)
