@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.formatters;
 
 import java.io.IOException;
 import java.util.*;
@@ -12,19 +12,27 @@ public class Stylish {
             var info = result.getKey().split("\\.");
             var status = info[0];
             switch (status) {
-                case "removed" -> {
+                case "rem" -> {
                     var newKey = " - " + info[1];
                     resultMap.put(newKey, result.getValue());
                 }
-                case "same" -> {
+                case "sam" -> {
                     var newKey = "   " + info[1];
                     resultMap.put(newKey, result.getValue());
                 }
-                case "added" -> {
+                case "add" -> {
                     var newKey = " + " + info[1];
                     resultMap.put(newKey, result.getValue());
                 }
-                case "updated" -> {
+                case "upd" -> {
+                    var newKey = " + " + info[1];
+                    resultMap.put(newKey, result.getValue());
+                }
+                case "reO" -> {
+                    var newKey = " - " + info[1];
+                    resultMap.put(newKey, result.getValue());
+                }
+                case "upN" -> {
                     var newKey = " + " + info[1];
                     resultMap.put(newKey, result.getValue());
                 }

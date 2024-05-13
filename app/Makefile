@@ -5,6 +5,11 @@ run-dist:
 
 run-dist2:
 	./build/install/app/bin/app src/test/resources/file1.yml src/test/resources/file2.yml
+run-dist3:
+	./build/install/app/bin/app -f plain src/test/resources/file1.json src/test/resources/file2.json
+run-dist4:
+	./build/install/app/bin/app -f plain src/test/resources/file1.yml src/test/resources/file2.yml
+
 
 help:
 	@./build/install/app/bin/app -h

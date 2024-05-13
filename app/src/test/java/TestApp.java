@@ -11,20 +11,37 @@ public final class TestApp {
     private static final String PATH3 = "src/test/resources/file1.yml";
     private static final String PATH4 = "src/test/resources/file2.yml";
     private static final String PATH5 = "src/test/resources/stylish.txt";
-    private static final String FORMAT = "stylish";
+
+    private static final String PATH6 = "src/test/resources/plain";
+    private static final String FORMAT1 = "stylish";
+    private static final String FORMAT2 = "plain";
 
 
     @Test
-    void testGenerateJson() throws Exception {
+    void testStylishJson() throws Exception {
         var expected = Files.readString(Path.of(PATH5));
-        String actual = Differ.generate(PATH1, PATH2, FORMAT);
+        String actual = Differ.generate(PATH1, PATH2, FORMAT1);
         assertEquals(expected, actual);
     }
 
     @Test
-    void testGenerateYaml() throws Exception {
+    void testStylishYaml() throws Exception {
         var expected = Files.readString(Path.of(PATH5));
-        String actual = Differ.generate(PATH3, PATH4, FORMAT);
+        String actual = Differ.generate(PATH3, PATH4, FORMAT1);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testPlainJson() throws Exception {
+        var expected = Files.readString(Path.of(PATH6));
+        String actual = Differ.generate(PATH1, PATH2, FORMAT2);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testPlainYaml() throws Exception {
+        var expected = Files.readString(Path.of(PATH6));
+        String actual = Differ.generate(PATH3, PATH4, FORMAT2);
         assertEquals(expected, actual);
     }
 }

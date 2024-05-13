@@ -14,25 +14,25 @@ public class Diff {
         Map<String, Object> resultMap = new LinkedHashMap<>();
         for (var key : mapFile1.entrySet()) {
             if (!mapFile2.containsKey(key.getKey())) {
-                String newKey = "removed." + key.getKey();
+                String newKey = "rem." + key.getKey();
                 resultMap.put(newKey, key.getValue());
             }
             if (mapFile2.containsKey(key.getKey())
                     && Objects.equals(mapFile1.get(key.getKey()), mapFile2.get(key.getKey()))) {
-                String newKey = "same."  + key.getKey();
+                String newKey = "sam."  + key.getKey();
                 resultMap.put(newKey, key.getValue());
             }
         }
         for (var key2 : mapFile2.entrySet()) {
             if (!mapFile1.containsKey(key2.getKey())) {
-                String newKey = "added." + key2.getKey();
+                String newKey = "add." + key2.getKey();
                 resultMap.put(newKey, key2.getValue());
             }
             if (mapFile1.containsKey(key2.getKey())
                     && !Objects.equals(mapFile1.get(key2.getKey()), mapFile2.get(key2.getKey()))) {
 
-                String oldKey = "removed."  + key2.getKey();
-                String newKey = "updated."  + key2.getKey();
+                String oldKey = "reO."  + key2.getKey();
+                String newKey = "upN."  + key2.getKey();
                 resultMap.put(oldKey, mapFile1.get(key2.getKey()));
                 resultMap.put(newKey, key2.getValue());
             }
