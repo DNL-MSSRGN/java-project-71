@@ -1,7 +1,13 @@
 plugins {
+    id 'java'
     id 'application'
     id 'checkstyle'
     id 'jacoco'
+    id 'com.adarshr.test-logger' version '3.2.0'
+}
+
+application {
+    mainClass = 'hexlet.code.App'
 }
 
 group = 'hexlet.code'
@@ -11,22 +17,23 @@ repositories {
     mavenCentral()
 }
 
+compileJava {
+    options.release = 20
+}
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.2')
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     implementation 'info.picocli:picocli:4.7.6'
-    annotationProcessor 'info.picocli:picocli-codegen:4.7.6'
-    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.0'
-
-    testImplementation(platform('org.junit:junit-bom:5.10.2'))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.17.0'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.17.0'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.10.2')
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
 }
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
@@ -35,15 +42,6 @@ jacocoTestReport {
     }
 }
 
-application {
-    mainClass = 'hexlet.code.App'
-}
-
-compileJava {
-    options.release
-}
-
-compileJava {
-    options.release = 17
-    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+run {
+    standardInput = System.in
 }

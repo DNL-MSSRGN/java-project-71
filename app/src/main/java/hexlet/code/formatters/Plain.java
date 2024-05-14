@@ -1,62 +1,56 @@
 package hexlet.code.formatters;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import hexlet.code.Diff;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import static hexlet.code.Compairse.ADDED;
+import static hexlet.code.Compairse.REMOVED;
+import static hexlet.code.Compairse.SAME;
+import static hexlet.code.Compairse.UPDATED;
 
-import static hexlet.code.Diff.diff;
 
 public class Plain {
+    public static String buildPlain(List<Diff> items) throws Exception {
 
+        return items.stream()
+                .filter(i -> !i.getChange().equals(SAME))
+                .map(Plain::getLine)
+                .collect(Collectors.joining("\n"));
+    }
 
-    private static String getPlainFormattedString(Object value) {
-
-        if (value == null) {
-            return null;
-        } else if (value.toString().contains("[") || value.toString().contains("{")) {
+    private static String modifyValue(Object x) {
+        if (x == null) {
+            return "null";
+        } else if (x instanceof List<?> || x instanceof Map<?, ?>) {
             return "[complex value]";
-        } else if (value instanceof String) {
-            return "'" + value + "'";
+        } else if (x instanceof String) {
+            return "'" + x + "'";
         } else {
-            return value.toString();
+            return x.toString();
         }
-
     }
 
-    public static String comparisonPlain(String pathToFile1, String pathToFile2) throws IOException {
-        var diffs = diff(pathToFile1, pathToFile2);
-        Map<String, Object> resultMap = new LinkedHashMap<>();
-        StringBuilder rezStr = new StringBuilder();
-        List<String> toSort = new ArrayList<>();
-        toSort.addAll(diffs.keySet());
-        toSort.sort((key1, key2) -> key1.substring(4).compareTo(key2.substring(4)));
-        String updated = "";
+    private static String getLine(Diff obj) {
+        String diff = obj.getChange();
+        String key = obj.getKey();
 
-        for (var key : toSort) {
-            var info = key.split("\\.");
-            var status = info[0];
-            if (status.equals("rem")) {
-                rezStr.append("Property '" + info[1] + "' was removed" + "\n");
-            } else if (status.equals("reO")) {
-                updated = "Property '" + info[1] + "' was updated. From "
-                        + getPlainFormattedString(diffs.get(key)) + " to ";
-            } else if (status.equals(("upN"))) {
-                updated += getPlainFormattedString(diffs.get(key)) + "\n";
-                rezStr.append(updated);
-                updated = "";
-
-            } else if (status.equals("add")) {
-                rezStr.append("Property '" + info[1] + "' was added with value: "
-                        + getPlainFormattedString(diffs.get(key)) + "\n");
+        switch (diff) {
+            case ADDED -> {
+                Object z = obj.getValue();
+                return "Property '" + key + "' was added with value: " + modifyValue(z);
             }
+            case REMOVED -> {
+                return "Property '" + key + "' was removed";
+            }
+            case UPDATED -> {
+                Object x = obj.getValueOld();
+                Object y = obj.getValueNew();
+                return "Property '" + key + "' was updated. From "
+                        + modifyValue(x) + " to " + modifyValue(y);
+            }
+            default -> throw new RuntimeException();
         }
-
-        if (rezStr.length() > 0) {
-            rezStr.setLength(rezStr.length() - 1);
-        }
-        return rezStr.toString();
     }
-
 }
+

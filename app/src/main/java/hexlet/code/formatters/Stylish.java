@@ -1,54 +1,44 @@
 package hexlet.code.formatters;
 
-import java.io.IOException;
-import java.util.*;
-import static hexlet.code.Diff.diff;
+import hexlet.code.Diff;
+import java.util.List;
+import java.util.stream.Collectors;
+import static hexlet.code.Compairse.ADDED;
+import static hexlet.code.Compairse.REMOVED;
+import static hexlet.code.Compairse.SAME;
+import static hexlet.code.Compairse.UPDATED;
 
-public class Stylish {
-    public static String comparisonStylish(String pathToFile1, String pathToFile2) throws IOException {
-        var diffMap = diff(pathToFile1, pathToFile2);
-        Map<String, Object> resultMap = new LinkedHashMap<>();
-        for (var result : diffMap.entrySet()) {
-            var info = result.getKey().split("\\.");
-            var status = info[0];
-            switch (status) {
-                case "rem" -> {
-                    var newKey = " - " + info[1];
-                    resultMap.put(newKey, result.getValue());
-                }
-                case "sam" -> {
-                    var newKey = "   " + info[1];
-                    resultMap.put(newKey, result.getValue());
-                }
-                case "add" -> {
-                    var newKey = " + " + info[1];
-                    resultMap.put(newKey, result.getValue());
-                }
-                case "upd" -> {
-                    var newKey = " + " + info[1];
-                    resultMap.put(newKey, result.getValue());
-                }
-                case "reO" -> {
-                    var newKey = " - " + info[1];
-                    resultMap.put(newKey, result.getValue());
-                }
-                case "upN" -> {
-                    var newKey = " + " + info[1];
-                    resultMap.put(newKey, result.getValue());
-                }
-                default -> {
-                    System.out.println(info[0]);
-                }
+
+public final class Stylish {
+
+    public static String buildStylish(List<Diff> items) {
+
+        String output = items.stream()
+                .map(Stylish::getLine)
+                .collect(Collectors.joining("\n"));
+
+        return "{\n" + output + "\n}";
+    }
+
+    private static String getLine(Diff obj) {
+        String diff = obj.getChange();
+        String key = obj.getKey();
+
+        switch (diff) {
+            case ADDED -> {
+                return "  + " + key + ": " + obj.getValue();
             }
+            case REMOVED -> {
+                return "  - " + key + ": " + obj.getValue();
+            }
+            case SAME -> {
+                return "    " + key + ": " + obj.getValue();
+            }
+            case UPDATED -> {
+                return "  - " + key + ": " + obj.getValueOld() + "\n"
+                        + "  + " + key + ": " + obj.getValueNew();
+            }
+            default -> throw new RuntimeException();
         }
-        List<String> toSort = new ArrayList<>();
-        toSort.addAll(resultMap.keySet());
-        toSort.sort((key1, key2) -> key1.substring(3).compareTo(key2.substring(3)));
-        StringJoiner joiner = new StringJoiner("\n", "{\n", "\n}");
-        for (String key : toSort) {
-            String s = key + ": " + resultMap.get(key);
-            joiner.add(s);
-        }
-        return joiner.toString();
     }
 }
