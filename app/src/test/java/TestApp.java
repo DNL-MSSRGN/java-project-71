@@ -61,4 +61,18 @@ public final class TestApp {
         String actual = Differ.generate(PATH3, PATH4, FORMAT3);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void testDefaultJson() throws Exception {
+        var expected = Files.readString(Path.of(PATH5));
+        String actual = Differ.generate(PATH1, PATH2);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testDefaultYaml() throws Exception {
+        var expected = Files.readString(Path.of(PATH5));
+        String actual = Differ.generate(PATH3, PATH4);
+        assertEquals(expected, actual);
+    }
 }
